@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission06_Fails.Models
 {
@@ -8,22 +10,23 @@ namespace Mission06_Fails.Models
         [Required]
         public int MovieID { get; set; }
 
-        [Required(ErrorMessage = "Category is required")]
-        public string Category { get; set; }
+        [ForeignKey("CategoryId")]
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
 
-        [Required(ErrorMessage = "Title is required")]
+        [Required]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Year is required")]
+        [Required]
+        [Range(1888, int.MaxValue, ErrorMessage = "The year must be greater than or equal to 1888")]
         public int Year { get; set; }
-
-        [Required(ErrorMessage = "Director is required")]
-        public string Director { get; set; }
-
-        [Required(ErrorMessage = "Rating is required")]
-        public string Rating { get; set; }
+        public string? Director { get; set; }
+        public string? Rating { get; set; }
+        [Required]
         public bool Edited { get; set; } // Not required
-        public string Lent { get; set; } // Not required
-        public string Notes { get; set; } // Not required
+        public string? LentTo { get; set; } // Not required
+        [Required]
+        public bool CopiedToPlex { get; set; }
+        public string? Notes { get; set; } // Not required
     }
 }

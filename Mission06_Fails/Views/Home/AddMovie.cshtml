@@ -10,8 +10,13 @@
 
 <form method="post">
 
-    <label asp-for="Category">Category</label>
-    <input asp-for="Category"/>
+    <select asp-for="CategoryId">
+        <option value="">Select a Category</option>
+        @foreach (Category c in ViewBag.Categories)
+        {
+            <option value="@c.CategoryId">@c.CategoryName</option>
+        }
+    </select>
     <br />
     <label asp-for="Title">Title</label>
     <input asp-for="Title"/>
@@ -36,8 +41,14 @@
         <option value="fale">No</option>
     </select>
     <br />
-    <label asp-for="Lent">Lent To</label> <!-- Not required -->
-    <input asp-for="Lent"/>
+    <label asp-for="LentTo">Lent To</label> <!-- Not required -->
+    <input asp-for="LentTo"/>
+    <br />
+    <label asp-for="CopiedToPlex">Copied To Plex</label> <!-- Not required -->
+    <select asp-for="CopiedToPlex">
+        <option value="true">Yes</option>
+        <option value="fale">No</option>
+    </select>
     <br />
     <label asp-for="Notes">Notes</label> <!-- Limited to 25 characters --> <!-- Not required -->
     <input asp-for="Notes" maxlength="25"/>

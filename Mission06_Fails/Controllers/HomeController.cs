@@ -20,6 +20,8 @@ namespace Mission06_Fails.Controllers
         [HttpGet]
         public IActionResult AddMovie()
         {
+            ViewBag.categories = _context.Categories.ToList();
+
             return View();
         }
 
@@ -35,6 +37,15 @@ namespace Mission06_Fails.Controllers
         public IActionResult About()
         {
             return View();
+        }
+
+        public IActionResult MovieList ()
+        {
+            var movies = _context.Movies
+                .Where(x => x.Year > 1888)
+                .OrderBy(x => x.Title).ToList();
+
+            return View(movies);
         }
     }
 }
